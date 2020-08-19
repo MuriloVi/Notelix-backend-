@@ -10,14 +10,23 @@ export default class NotesController {
 
     async removeNote(request: Request, response: Response) {
         const note_ID = request.params.id
-        console.log(note_ID)
-        return response.status(201).send()
+        try{           
+            const removeNotes = await db('notes').where('id', note_ID).del()
+             return response.status(201).send()
+
+        }catch(err){
+            return response.status(400).json({
+                error: 'Unexpected error while creating new note'
+            })
+        }
+       
     }
 
     async indexId(request: Request, response: Response) {
         const notes = await db('notes')
         try {
             const note_ID = request.params.id
+            console.log(note_ID)
             const note = await notes.filter(note => note.id == note_ID)
             return response.json(note)
         } catch (err) {
