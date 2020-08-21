@@ -7,6 +7,24 @@ export default class NotesController {
     //index - listagem 
     //create - criação
     //removeNote - delete
+    async updateNote(request: Request, response: Response){
+        const note_ID = request.params.id
+        const {
+            title,
+            text
+        } = request.body
+        try{
+            const updateNotes = await db('notes').where('id', note_ID).update({
+                title,
+                text
+            })
+            return response.status(201).send()
+        }catch(err){
+           return response.send(400).json({
+               error: 'Unexpected error while updating note' 
+           })
+        }
+    }
 
     async removeNote(request: Request, response: Response) {
         const note_ID = request.params.id

@@ -10,6 +10,7 @@ routes.post ('/notes', notesController.create)
 routes.get('/notes', notesController.index)
 routes.get('/notes/:id', notesController.indexId)
 routes.delete('/notes/:id', notesController.removeNote)
+routes.put('/notes/:id', notesController.updateNote)
 
 
 export default routes;
