@@ -44,7 +44,6 @@ export default class NotesController {
         const notes = await db('notes')
         try {
             const note_ID = request.params.id
-            console.log(note_ID)
             const note = await notes.filter(note => note.id == note_ID)
             return response.json(note)
         } catch (err) {
